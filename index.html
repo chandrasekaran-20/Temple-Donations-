@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>திருக்கோவில் காணிக்கை</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+<h1>🛕 காணிக்கை வழங்குங்கள்</h1>
+
+<div class="box">
+
+<input id="amount" type="number" placeholder="தொகை (₹) *" required>
+<input id="name" type="text" placeholder="பெயர் *" required>
+<input id="mobile" type="tel" placeholder="மொபைல் எண் *" required>
+<input id="place" type="text" placeholder="நகரம் / ஊர் *" required>
+
+<button onclick="startPayment()" class="donate-btn">UPI மூலம் செலுத்தவும்</button>
+
+<div id="uploadSection" style="display:none;margin-top:15px;">
+<p>பணம் செலுத்திய Screenshot பதிவேற்றம் செய்யவும்:</p>
+<input type="file" id="screenshot" accept="image/*">
+<button onclick="uploadData()">Submit</button>
+</div>
+
+</div>
+</div>
+
+<script>
+
+let donationData = {};
+
+function generateToken(){
+ return "SIVA-" + Date.now();
+}
+
+function startPayment(){
+
+let amount = document.getElementById("amount").value;
+let name = document.getElementById("name").value;
+let mobile = document.getElementById("mobile").value;
+let place = document.getElementById("place").value;
+
+if(!amount || !name || !mobile || !place){
+ alert("அனைத்து கட்டாய தகவல்களும் நிரப்பவும்");
+ return;
+}
+
+let token = generateToken();
+let timestamp = new Date().toLocaleString();
+
+donationData = { token, timestamp, amount, name, mobile, place };
+
+let upi = `upi://pay?pa=chandrasekarandnti@okaxis&pn=Temple&am=${amount}&cu=INR&tn=${token}`;
+
+window.location.href = upi;
+
+setTimeout(()=>{
+ if(confirm("பணம் செலுத்தியிருந்தால் OK அழுத்தவும்")){
+   document.getElementById("uploadSection").style.display="block";
+ }
+},8000);
+
+}
+
+function uploadData(){
+
+let file = document.getElementById("screenshot").files[0];
+if(!file){
+ alert("Screenshot தேர்வு செய்யவும்");
+ return;
+}
+
+let reader = new FileReader();
+reader.onload = function(){
+
+donationData.screenshot = reader.result;
+
+fetch("PASTE_GOOGLE_SCRIPT_URL_HERE",{
+ method:"POST",
+ body:JSON.stringify(donationData)
+})
+.then(res=>res.json())
+.then(()=>{
+ alert("பதிவு வெற்றிகரமாக சேமிக்கப்பட்டது");
+ window.location.reload();
+});
+
+};
+
+reader.readAsDataURL(file);
+
+}
+
+</script>
+
+</body>
+</html>
