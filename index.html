@@ -1,60 +1,98 @@
+
 <!DOCTYPE html>
 <html lang="ta">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>அருள்மிகு திருக்கோவில் காணிக்கை</title>
-<style>
-body{
-  background:linear-gradient(#000000,#4b0000);
-  color:white;
-  font-family:'Noto Sans Tamil', sans-serif;
-  text-align:center;
-  padding:20px;
-}
-.container{max-width:600px;margin:auto;}
-.box{
-  background:white;
-  color:black;
-  padding:20px;
-  border-radius:10px;
-}
-input{
-  width:95%;
-  padding:10px;
-  margin:6px 0;
-}
-button{
-  margin-top:10px;
-  padding:12px;
-  border:none;
-  border-radius:8px;
-  font-size:16px;
-  cursor:pointer;
-}
-.pay-btn{background:green;color:white;width:100%;}
-.upload-btn{background:#8B0000;color:white;width:100%;}
-</style>
+<title>அருள்மிகு ஶ்ரீ அம்பிகா ஸமேத சிதம்பரேஸ்வரர் திருக்கோவில்</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body oncontextmenu="return false">
 
 <div class="container">
-<h1>🛕 அருள்மிகு திருக்கோவில்</h1>
-<p>ஓம் நமசிவாய 🙏 காணிக்கை வழங்குங்கள்</p>
+
+<h1>🛕 அருள்மிகு ஶ்ரீ அம்பிகா ஸமேத சிதம்பரேஸ்வரர் திருக்கோவில்</h1>
+<p class="sub">ஓம் நமசிவாய 🙏 காணிக்கை வழங்குங்கள்</p>
 
 <div class="box">
 
-<input id="amount" type="number" placeholder="காணிக்கை தொகை (₹) *" required>
+<div class="amount-buttons">
+<button onclick="setAmount(50)">₹50</button>
+<button onclick="setAmount(100)">₹100</button>
+<button onclick="setAmount(200)">₹200</button>
+<button onclick="setAmount(400)">₹400</button>
+<button onclick="setAmount(500)">₹500</button>
+<button onclick="setAmount(1000)">₹1000</button>
+<button onclick="setAmount(1500)">₹1500</button>
+<button onclick="setAmount(2000)">₹2000</button>
+<button onclick="setAmount(3000)">₹3000</button>
+<button onclick="setAmount(5000)">₹5000</button>
+</div>
+
+<input id="amount" type="number" placeholder="தொகை (₹) *" required>
 <input id="name" type="text" placeholder="பெயர் *" required>
 <input id="mobile" type="tel" placeholder="மொபைல் எண் *" required>
 <input id="place" type="text" placeholder="நகரம் / ஊர் *" required>
+<input id="email" type="email" placeholder="மின்னஞ்சல் (விருப்பம்)">
+<input id="pan" type="text" placeholder="PAN எண் (விருப்பம்)">
 
-<button onclick="startPayment()" class="pay-btn">
-UPI மூலம் காணிக்கை செலுத்தவும்
-</button>
+<button onclick="startPayment()" class="donate-btn">UPI மூலம் காணிக்கை செலுத்தவும்</button>
 
-<div id="uploadSection" style="display:none;margin-top:15px;">
-<p>பணம் செலுத்திய Screenshot பதிவேற்றம் செய்யவும்:</p>
-<input type="file" id="screenshot" accept="image/*">
-<button onclick="
+</div>
+</div>
+
+<script>
+
+function setAmount(val){
+ document.getElementById("amount").value = val;
+}
+
+function generateToken(){
+ return "SIVA-" + Date.now() + "-" + Math.floor(Math.random()*1000);
+}
+
+function startPayment(){
+
+let amount = document.getElementById("amount").value;
+let name = document.getElementById("name").value;
+let mobile = document.getElementById("mobile").value;
+let place = document.getElementById("place").value;
+let email = document.getElementById("email").value;
+let pan = document.getElementById("pan").value;
+
+if(!amount || !name || !mobile || !place){
+ alert("தயவு செய்து கட்டாய தகவல்களை நிரப்பவும்");
+ return;
+}
+
+let token = generateToken();
+let timestamp = new Date().toLocaleString();
+
+let data = { token, timestamp, amount, name, mobile, place, email, pan };
+
+localStorage.setItem("donationData", JSON.stringify(data));
+
+let upi = `upi://pay?pa=chandrasekarandnti@okaxis&pn=Arulmigu%20Sri%20Ambika%20Sametha%20Chidambareswarar&am=${amount}&cu=INR&tn=${token}`;
+
+window.location.href = upi;
+
+setTimeout(()=>{
+ if(confirm("பணம் செலுத்தியிருந்தால் OK அழுத்தவும்")){
+   fetch("PASTE_GOOGLE_SCRIPT_URL_HERE",{
+     method:"POST",
+     body:JSON.stringify(data)
+   })
+   .then(res=>res.json())
+   .then(()=>{
+     window.location.href="thankyou.html";
+   });
+ }
+},8000);
+
+}
+
+</script>
+
+</body>
+</html>
