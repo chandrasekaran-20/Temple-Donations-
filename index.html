@@ -778,7 +778,7 @@
   <span class="footer-om">ॐ</span>
   <div class="footer-text">
     <strong>Arulmigu Sivakamasundari Udanurai Chithambareswarar Temple</strong><br>
-    Donations managed by: <strong>Subramanian V</strong> &nbsp;|&nbsp; GPay: <strong>9443915935</strong><br><br>
+    Donations managed by: <strong>Subramanian V</strong> &nbsp;|&nbsp; UPI: <strong>sssudeep70@okicici</strong> &nbsp;|&nbsp; GPay: <strong>9443915935</strong><br><br>
     <em>All donations are used solely for temple activities and devotee welfare.</em><br>
     Om Namah Shivaya 🔱
   </div>
@@ -848,9 +848,9 @@
         <div class="gpay-row">
           <div class="gpay-icon">📱</div>
           <div class="gpay-info">
-            <div class="gpay-title">GPay / UPI Number</div>
-            <div class="gpay-number">9443915935 <button class="copy-btn" onclick="copyNumber()">Copy</button></div>
-            <div class="gpay-name">Subramanian V · sssudeep 2009</div>
+            <div class="gpay-title">UPI ID (GPay / Any App)</div>
+            <div class="gpay-number">sssudeep70@okicici <button class="copy-btn" onclick="copyUPI()">Copy</button></div>
+            <div class="gpay-name">Subramanian V &nbsp;|&nbsp; GPay: 9443915935</div>
           </div>
         </div>
 
@@ -896,9 +896,10 @@
 </div>
 
 <script>
-  const UPI_ID = '9443915935@okbizaxis'; // GPay UPI VPA for mobile number
-  const MERCHANT_NAME = 'Subramanian+V';
-  const PAYEE_MOBILE = '9443915935';
+  const MERCHANT_NAME = 'Subramanian V';
+  const MERCHANT_ENC  = 'Subramanian+V';
+  const PAYEE_MOBILE  = '9443915935';
+  const UPI_ID        = 'sssudeep70@okicici';  // Exact GPay UPI ID
 
   let donorName = '', donorMobile = '', donationAmount = 0;
 
@@ -984,46 +985,50 @@
   // ── UPI Deep Links ──
   function buildUpiLinks() {
     const amt  = donationAmount;
-    const note = encodeURIComponent('Donation to Chithambareswarar Temple by ' + donorName);
-    const name = MERCHANT_NAME;
+    const noteRaw = 'Donation to Chithambareswarar Temple by ' + donorName;
+    const note = encodeURIComponent(noteRaw);
 
-    // GPay: intent for direct mobile number payment
-    const gpayUrl = `tez://upi/pay?pa=${encodeURIComponent(PAYEE_MOBILE + '@okbizaxis')}&pn=${name}&am=${amt}&cu=INR&tn=${note}`;
-    const gpayFallback = `https://pay.google.com/gp/v/send/${PAYEE_MOBILE}`;
+    // ── GPay (tez://) with exact UPI ID — resolves correct banking name
+    const gpayIntent  = `tez://upi/pay?pa=${UPI_ID}&pn=${MERCHANT_ENC}&am=${amt}&cu=INR&tn=${note}`;
+    const gpayWebLink = `https://pay.google.com/gp/v/send/${PAYEE_MOBILE}`;
+    document.getElementById('gpayLink').setAttribute('data-intent',  gpayIntent);
+    document.getElementById('gpayLink').setAttribute('data-weblink', gpayWebLink);
 
-    document.getElementById('gpayLink').setAttribute('data-gpay', gpayUrl);
-    document.getElementById('gpayLink').setAttribute('data-fallback', gpayFallback);
+    // ── Universal UPI intent using exact UPI ID (works for PhonePe, BHIM, Paytm, any UPI app)
+    const upiBase = `upi://pay?pa=${UPI_ID}&pn=${MERCHANT_ENC}&am=${amt}&cu=INR&tn=${note}`;
+    document.getElementById('phonePeLink').href = `phonepe://pay?pa=${UPI_ID}&pn=${MERCHANT_ENC}&am=${amt}&cu=INR&tn=${note}`;
+    document.getElementById('paytmLink').href   = `paytmmp://pay?pa=${UPI_ID}&pn=${MERCHANT_ENC}&am=${amt}&cu=INR&tn=${note}`;
+    document.getElementById('bhimLink').href    = upiBase;
 
-    const phonePeUrl = `phonepe://pay?pa=${encodeURIComponent(PAYEE_MOBILE + '@ybl')}&pn=${name}&am=${amt}&cu=INR&tn=${note}`;
-    document.getElementById('phonePeLink').href = phonePeUrl;
-
-    const paytmUrl = `paytmmp://pay?pa=${encodeURIComponent(PAYEE_MOBILE + '@paytm')}&pn=${name}&am=${amt}&cu=INR&tn=${note}`;
-    document.getElementById('paytmLink').href = paytmUrl;
-
-    const bhimUrl = `upi://pay?pa=${encodeURIComponent(PAYEE_MOBILE + '@upi')}&pn=${name}&am=${amt}&cu=INR&tn=${note}`;
-    document.getElementById('bhimLink').href = bhimUrl;
+    // ── Manual fallback panel
+    document.getElementById('manualMobile').textContent = PAYEE_MOBILE;
+    document.getElementById('manualName').textContent   = MERCHANT_NAME;
+    document.getElementById('manualAmt').textContent    = '₹' + amt.toLocaleString('en-IN');
   }
 
   function handleGpay(e) {
     e.preventDefault();
-    const btn = document.getElementById('gpayLink');
-    const gpayIntent = btn.getAttribute('data-gpay');
-    const fallback   = btn.getAttribute('data-fallback');
+    const btn     = document.getElementById('gpayLink');
+    const intent  = btn.getAttribute('data-intent');   // tez:// — opens GPay app
+    const weblink = btn.getAttribute('data-weblink');  // web fallback
 
-    // Try native GPay deep link; fall back to web
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = gpayIntent;
-    document.body.appendChild(iframe);
-    setTimeout(() => {
-      document.body.removeChild(iframe);
-      // If on mobile, the app would have opened. On desktop, open web.
-      window.open(fallback, '_blank');
-    }, 1500);
+    // On mobile: try tez:// deep link → GPay app opens with number pre-filled
+    // On desktop: open web Pay link
+    const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
+    if (isMobile) {
+      window.location.href = intent;
+      // If app not installed after 1.8s, redirect to web
+      setTimeout(() => { window.open(weblink, '_blank'); }, 1800);
+    } else {
+      window.open(weblink, '_blank');
+    }
   }
 
   function handleUpiApp(e, app) {
-    // Let the href handle it (deep link to app)
+    // href deep link handles it; show manual panel as backup after 2s
+    setTimeout(() => {
+      document.getElementById('manualPanel').style.display = 'block';
+    }, 2200);
   }
 
   // ── Confirm ──
@@ -1032,12 +1037,12 @@
       `Donor: <span>${donorName}</span><br>` +
       `Mobile: <span>${donorMobile}</span><br>` +
       `Amount: <span>₹${donationAmount.toLocaleString('en-IN')}</span><br>` +
-      `To: <span>9443915935 (Subramanian V)</span>`;
+      `UPI: <span>sssudeep70@okicici (Subramanian V)</span>`;
     showStep(4);
   }
 
-  function copyNumber() {
-    navigator.clipboard.writeText('9443915935').then(() => {
+  function copyUPI() {
+    navigator.clipboard.writeText('sssudeep70@okicici').then(() => {
       const btn = document.querySelector('.copy-btn');
       btn.textContent = 'Copied!';
       setTimeout(() => btn.textContent = 'Copy', 2000);
