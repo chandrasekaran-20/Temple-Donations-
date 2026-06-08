@@ -99,7 +99,7 @@
                 <p><strong>Location:</strong> Mettupatti</p>
                 <p><strong>For Donations via UPI:</strong></p>
                 <p class="phone-number">📱 +91 9443915935 (Google Pay / PhonePe)</p>
-                <p class="highlight">Scan QR code or click "Donate Now" to pay directly</p>
+                <p class="highlight">Use the UPI ID: 9443915935@okaxis or click "Donate Now" to get payment instructions</p>
             </div>
         </div>
     </section>
@@ -115,24 +115,14 @@
     <!-- Donation Modal -->
     <div id="donationModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Process Your Donation</h2>
-            <p>Choose your preferred payment method:</p>
-            <div class="payment-methods">
-                <button class="payment-btn" onclick="payViaGPay()">
-                    <span class="icon">🔗</span>
-                    Google Pay
-                </button>
-                <button class="payment-btn" onclick="payViaPhonePe()">
-                    <span class="icon">📱</span>
-                    PhonePe
-                </button>
-                <button class="payment-btn" onclick="payViaUPI()">
-                    <span class="icon">💳</span>
-                    Direct UPI
-                </button>
-            </div>
+            <!-- Content will be populated by JavaScript -->
         </div>
+    </div>
+
+    <!-- Language Toggle -->
+    <div class="language-toggle">
+        <button onclick="toggleLanguage('en')" class="lang-btn active" id="langEn">English</button>
+        <button onclick="toggleLanguage('ta')" class="lang-btn" id="langTa">Tamil</button>
     </div>
 
     <script src="script.js"></script>
