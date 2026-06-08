@@ -845,26 +845,46 @@
           Donor: <strong id="displayDonor" style="color:var(--gold-light)"></strong>
         </div>
 
+        <!-- UPI ID display -->
         <div class="gpay-row">
           <div class="gpay-icon">📱</div>
           <div class="gpay-info">
-            <div class="gpay-title">UPI ID (GPay / Any App)</div>
+            <div class="gpay-title">UPI ID</div>
             <div class="gpay-number">sssudeep70@okicici <button class="copy-btn" onclick="copyUPI()">Copy</button></div>
-            <div class="gpay-name">Subramanian V &nbsp;|&nbsp; GPay: 9443915935</div>
+            <div class="gpay-name">Subramanian V &nbsp;|&nbsp; Mobile: 9443915935</div>
           </div>
         </div>
 
-        <!-- Direct GPay deep-link -->
-        <a id="gpayLink" href="#" class="gpay-btn" target="_blank" onclick="handleGpay(event)">
-          📲 Open Google Pay
-        </a>
+        <!-- STEP: Instructions -->
+        <div style="background:rgba(201,152,42,0.08);border:1px solid rgba(201,152,42,0.25);border-radius:6px;padding:14px 16px;margin-bottom:14px;text-align:left;">
+          <div style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.15em;color:var(--gold);margin-bottom:10px;">HOW TO PAY</div>
+          <div style="font-size:13px;color:rgba(253,248,238,0.8);line-height:2;">
+            1️⃣ Open <strong>GPay / PhonePe / Paytm</strong> on your phone<br>
+            2️⃣ Tap <strong>Send Money → UPI ID</strong><br>
+            3️⃣ Enter UPI ID: <strong style="color:var(--gold-light)">sssudeep70@okicici</strong><br>
+            4️⃣ Enter amount: <strong id="manualAmt" style="color:var(--gold-light)"></strong><br>
+            5️⃣ Tap <strong>Pay</strong> — name shows as <strong>Subramanian V</strong>
+          </div>
+        </div>
 
-        <!-- Other UPI apps -->
-        <div style="font-size:12px;color:rgba(253,248,238,0.5);margin-bottom:8px;">or open with</div>
-        <div class="upi-apps">
-          <a id="phonePeLink" href="#" class="upi-app" target="_blank" onclick="handleUpiApp(event,'phonepe')">📲 PhonePe</a>
-          <a id="paytmLink"   href="#" class="upi-app" target="_blank" onclick="handleUpiApp(event,'paytm')">📲 Paytm</a>
-          <a id="bhimLink"    href="#" class="upi-app" target="_blank" onclick="handleUpiApp(event,'bhim')">📲 BHIM</a>
+        <!-- App buttons -->
+        <div style="font-size:12px;color:rgba(253,248,238,0.5);margin-bottom:8px;text-align:center;">Open directly in your UPI app</div>
+        <div class="upi-apps" style="justify-content:center;margin-bottom:4px;">
+          <a id="gpayLink"     href="#" class="upi-app" onclick="openApp(event,'gpay')">
+            <span style="font-size:18px;">G</span> GPay
+          </a>
+          <a id="phonePeLink" href="#" class="upi-app" onclick="openApp(event,'phonepe')">
+            📲 PhonePe
+          </a>
+          <a id="paytmLink"   href="#" class="upi-app" onclick="openApp(event,'paytm')">
+            📲 Paytm
+          </a>
+          <a id="bhimLink"    href="#" class="upi-app" onclick="openApp(event,'bhim')">
+            📲 BHIM
+          </a>
+        </div>
+        <div style="font-size:11px;color:rgba(253,248,238,0.35);text-align:center;margin-top:6px;font-style:italic;">
+          App buttons work on mobile. If it doesn't open, use the UPI ID above manually.
         </div>
       </div>
 
@@ -985,50 +1005,33 @@
   // ── UPI Deep Links ──
   function buildUpiLinks() {
     const amt  = donationAmount;
-    const noteRaw = 'Donation to Chithambareswarar Temple by ' + donorName;
-    const note = encodeURIComponent(noteRaw);
-
-    // ── GPay (tez://) with exact UPI ID — resolves correct banking name
-    const gpayIntent  = `tez://upi/pay?pa=${UPI_ID}&pn=${MERCHANT_ENC}&am=${amt}&cu=INR&tn=${note}`;
-    const gpayWebLink = `https://pay.google.com/gp/v/send/${PAYEE_MOBILE}`;
-    document.getElementById('gpayLink').setAttribute('data-intent',  gpayIntent);
-    document.getElementById('gpayLink').setAttribute('data-weblink', gpayWebLink);
-
-    // ── Universal UPI intent using exact UPI ID (works for PhonePe, BHIM, Paytm, any UPI app)
-    const upiBase = `upi://pay?pa=${UPI_ID}&pn=${MERCHANT_ENC}&am=${amt}&cu=INR&tn=${note}`;
-    document.getElementById('phonePeLink').href = `phonepe://pay?pa=${UPI_ID}&pn=${MERCHANT_ENC}&am=${amt}&cu=INR&tn=${note}`;
-    document.getElementById('paytmLink').href   = `paytmmp://pay?pa=${UPI_ID}&pn=${MERCHANT_ENC}&am=${amt}&cu=INR&tn=${note}`;
-    document.getElementById('bhimLink').href    = upiBase;
-
-    // ── Manual fallback panel
-    document.getElementById('manualMobile').textContent = PAYEE_MOBILE;
-    document.getElementById('manualName').textContent   = MERCHANT_NAME;
-    document.getElementById('manualAmt').textContent    = '₹' + amt.toLocaleString('en-IN');
+    const note = encodeURIComponent('Temple Donation by ' + donorName);
+    // Store for app buttons
+    window._upiParams = { amt, note };
+    document.getElementById('manualAmt').textContent = '₹' + amt.toLocaleString('en-IN');
   }
 
-  function handleGpay(e) {
+  function openApp(e, app) {
     e.preventDefault();
-    const btn     = document.getElementById('gpayLink');
-    const intent  = btn.getAttribute('data-intent');   // tez:// — opens GPay app
-    const weblink = btn.getAttribute('data-weblink');  // web fallback
+    const { amt, note } = window._upiParams || { amt: donationAmount, note: encodeURIComponent('Temple Donation') };
+    const pa  = UPI_ID;         // sssudeep70@okicici
+    const pn  = MERCHANT_ENC;   // Subramanian+V
+    const cu  = 'INR';
 
-    // On mobile: try tez:// deep link → GPay app opens with number pre-filled
-    // On desktop: open web Pay link
-    const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
-    if (isMobile) {
-      window.location.href = intent;
-      // If app not installed after 1.8s, redirect to web
-      setTimeout(() => { window.open(weblink, '_blank'); }, 1800);
-    } else {
-      window.open(weblink, '_blank');
+    let url = '';
+    if (app === 'gpay') {
+      // tez:// is the official GPay URI scheme — pa= with exact UPI ID shows correct name
+      url = `tez://upi/pay?pa=${pa}&pn=${pn}&am=${amt}&cu=${cu}&tn=${note}`;
+    } else if (app === 'phonepe') {
+      url = `phonepe://pay?pa=${pa}&pn=${pn}&am=${amt}&cu=${cu}&tn=${note}`;
+    } else if (app === 'paytm') {
+      url = `paytmmp://pay?pa=${pa}&pn=${pn}&am=${amt}&cu=${cu}&tn=${note}`;
+    } else if (app === 'bhim') {
+      url = `upi://pay?pa=${pa}&pn=${pn}&am=${amt}&cu=${cu}&tn=${note}`;
     }
-  }
 
-  function handleUpiApp(e, app) {
-    // href deep link handles it; show manual panel as backup after 2s
-    setTimeout(() => {
-      document.getElementById('manualPanel').style.display = 'block';
-    }, 2200);
+    // Try to open the app
+    window.location.href = url;
   }
 
   // ── Confirm ──
