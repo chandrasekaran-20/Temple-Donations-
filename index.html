@@ -1,130 +1,1064 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sithambareswarar Temple - Donations</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arulmigu Sivakamasundari Udanurai Chithambareswarar Temple</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9982a;
+    --gold-light: #f0c94a;
+    --gold-pale: #fdf3d0;
+    --crimson: #8b1a1a;
+    --crimson-dark: #5c0d0d;
+    --saffron: #e8861c;
+    --cream: #fdf8ee;
+    --dark: #1a0a00;
+    --shadow-gold: rgba(201,152,42,0.35);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--crimson-dark);
+    font-family: 'EB Garamond', serif;
+    color: var(--cream);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── BACKGROUND PATTERN ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(201,152,42,0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(232,134,28,0.08) 0%, transparent 50%),
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9982a' fill-opacity='0.04'%3E%3Cpath d='M30 0 L35 10 L45 10 L37 17 L40 28 L30 22 L20 28 L23 17 L15 10 L25 10 Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrapper { position: relative; z-index: 1; }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(180deg, #0d0000 0%, var(--crimson-dark) 100%);
+    border-bottom: 3px solid var(--gold);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold-light), var(--saffron), var(--gold-light), transparent);
+  }
+
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 36px 24px 28px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .om-symbol {
+    font-size: 52px;
+    line-height: 1;
+    color: var(--gold-light);
+    text-shadow: 0 0 30px var(--gold), 0 0 60px rgba(201,152,42,0.4);
+    animation: glow-pulse 3s ease-in-out infinite;
+    margin-bottom: 4px;
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% { text-shadow: 0 0 20px var(--gold), 0 0 40px rgba(201,152,42,0.3); }
+    50%       { text-shadow: 0 0 40px var(--gold-light), 0 0 80px rgba(240,201,74,0.5); }
+  }
+
+  .temple-name {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(15px, 3.5vw, 22px);
+    font-weight: 700;
+    color: var(--gold-light);
+    letter-spacing: 0.06em;
+    line-height: 1.4;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+  }
+
+  .temple-sub {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(11px, 2.5vw, 14px);
+    color: var(--saffron);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .divider {
+    width: 100%;
+    max-width: 500px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 6px 0;
+  }
+
+  .tagline {
+    font-style: italic;
+    color: var(--gold-pale);
+    font-size: clamp(13px, 2.5vw, 16px);
+    opacity: 0.85;
+  }
+
+  /* ── HERO SECTION ── */
+  .hero {
+    background: linear-gradient(160deg, #3d0a0a 0%, #1a0303 60%, #2d0606 100%);
+    padding: 60px 24px;
+    text-align: center;
+    position: relative;
+    border-bottom: 1px solid rgba(201,152,42,0.3);
+  }
+
+  .hero-lamp {
+    font-size: 56px;
+    display: block;
+    margin-bottom: 16px;
+    animation: flicker 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 16px rgba(232,134,28,0.7));
+  }
+
+  @keyframes flicker {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    25%       { opacity: 0.88; transform: scale(0.97); }
+    50%       { opacity: 1; transform: scale(1.02); }
+    75%       { opacity: 0.92; transform: scale(0.99); }
+  }
+
+  .hero h2 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(20px, 5vw, 32px);
+    color: var(--gold-light);
+    font-weight: 700;
+    margin-bottom: 16px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+  }
+
+  .hero p {
+    font-size: clamp(15px, 2.5vw, 18px);
+    color: var(--cream);
+    max-width: 640px;
+    margin: 0 auto 32px;
+    line-height: 1.75;
+    opacity: 0.92;
+  }
+
+  .donate-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--saffron) 50%, var(--gold) 100%);
+    background-size: 200% 200%;
+    color: var(--dark);
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    padding: 16px 52px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 4px 24px rgba(201,152,42,0.5), inset 0 1px 0 rgba(255,255,255,0.3);
+    transition: all 0.3s ease;
+    animation: btn-shine 3s linear infinite;
+    text-transform: uppercase;
+  }
+
+  @keyframes btn-shine {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .donate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(201,152,42,0.7), inset 0 1px 0 rgba(255,255,255,0.3);
+  }
+
+  /* ── INFO STRIPS ── */
+  .info-strip {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0;
+    background: #0d0000;
+    border-top: 1px solid rgba(201,152,42,0.25);
+    border-bottom: 1px solid rgba(201,152,42,0.25);
+  }
+
+  .info-item {
+    flex: 1 1 200px;
+    padding: 24px 20px;
+    text-align: center;
+    border-right: 1px solid rgba(201,152,42,0.15);
+  }
+
+  .info-item:last-child { border-right: none; }
+
+  .info-icon { font-size: 28px; display: block; margin-bottom: 8px; }
+
+  .info-label {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  .info-value {
+    font-size: 14px;
+    color: var(--cream);
+    opacity: 0.85;
+  }
+
+  /* ── ABOUT ── */
+  .section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 56px 24px;
+  }
+
+  .section-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(16px, 3.5vw, 22px);
+    color: var(--gold-light);
+    text-align: center;
+    margin-bottom: 8px;
+    letter-spacing: 0.06em;
+  }
+
+  .section-rule {
+    width: 180px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 36px;
+  }
+
+  .about-text {
+    font-size: 17px;
+    line-height: 1.85;
+    color: rgba(253,248,238,0.88);
+    text-align: justify;
+  }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10,0,0,0.88);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-overlay.active { display: flex; }
+
+  .modal {
+    background: linear-gradient(160deg, #2a0707 0%, #1a0303 100%);
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 440px;
+    padding: 36px 32px;
+    position: relative;
+    box-shadow: 0 0 60px rgba(201,152,42,0.3), 0 24px 80px rgba(0,0,0,0.8);
+    animation: modal-in 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  }
+
+  @keyframes modal-in {
+    from { opacity: 0; transform: scale(0.85) translateY(20px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .modal::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: 20px; right: 20px; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 14px; right: 16px;
+    background: none; border: none;
+    color: var(--gold);
+    font-size: 24px;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+
+  .modal-close:hover { color: var(--gold-light); }
+
+  .modal-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 18px;
+    color: var(--gold-light);
+    text-align: center;
+    margin-bottom: 4px;
+  }
+
+  .modal-subtitle {
+    font-size: 13px;
+    color: var(--saffron);
+    text-align: center;
+    margin-bottom: 28px;
+    font-style: italic;
+    opacity: 0.85;
+  }
+
+  /* STEP INDICATOR */
+  .steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 28px;
+  }
+
+  .step-dot {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    border: 2px solid rgba(201,152,42,0.4);
+    background: transparent;
+    color: rgba(201,152,42,0.5);
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+  }
+
+  .step-dot.active {
+    border-color: var(--gold-light);
+    background: var(--gold);
+    color: var(--dark);
+  }
+
+  .step-dot.done {
+    border-color: var(--gold);
+    background: rgba(201,152,42,0.2);
+    color: var(--gold);
+  }
+
+  .step-line {
+    flex: 1;
+    height: 2px;
+    max-width: 60px;
+    background: rgba(201,152,42,0.25);
+    transition: background 0.3s;
+  }
+
+  .step-line.done { background: var(--gold); }
+
+  /* FORM */
+  .form-group { margin-bottom: 18px; }
+
+  .form-label {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 7px;
+  }
+
+  .form-input {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201,152,42,0.4);
+    border-radius: 4px;
+    padding: 12px 14px;
+    font-family: 'EB Garamond', serif;
+    font-size: 16px;
+    color: var(--cream);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .form-input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(201,152,42,0.15);
+  }
+
+  .form-input::placeholder { color: rgba(253,248,238,0.3); }
+
+  .amount-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .amount-chip {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,152,42,0.35);
+    border-radius: 4px;
+    padding: 10px 8px;
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    color: var(--cream);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .amount-chip:hover { border-color: var(--gold); color: var(--gold-light); }
+  .amount-chip.selected {
+    border-color: var(--gold-light);
+    background: rgba(201,152,42,0.15);
+    color: var(--gold-light);
+  }
+
+  .btn-primary {
+    width: 100%;
+    background: linear-gradient(135deg, var(--gold), var(--saffron));
+    color: var(--dark);
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.1em;
+    padding: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all 0.25s;
+    text-transform: uppercase;
+    box-shadow: 0 4px 20px rgba(201,152,42,0.4);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 28px rgba(201,152,42,0.6);
+  }
+
+  /* PAYMENT STEP */
+  .payment-box {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,152,42,0.3);
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .payment-amount {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 32px;
+    color: var(--gold-light);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .payment-label {
+    font-size: 13px;
+    color: var(--saffron);
+    font-style: italic;
+    margin-bottom: 16px;
+  }
+
+  .gpay-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: rgba(201,152,42,0.08);
+    border: 1px solid rgba(201,152,42,0.25);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+
+  .gpay-icon { font-size: 28px; }
+
+  .gpay-info { text-align: left; }
+
+  .gpay-title {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+
+  .gpay-number {
+    font-size: 20px;
+    color: var(--cream);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+
+  .gpay-name {
+    font-size: 13px;
+    color: rgba(253,248,238,0.6);
+    font-style: italic;
+  }
+
+  .gpay-btn {
+    display: block;
+    width: 100%;
+    background: #1a73e8;
+    color: #fff;
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: background 0.2s, transform 0.2s;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .gpay-btn:hover { background: #1558c0; transform: translateY(-1px); }
+
+  .upi-apps {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .upi-app {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(201,152,42,0.2);
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-size: 12px;
+    color: var(--cream);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .upi-app:hover { border-color: var(--gold); color: var(--gold-light); }
+
+  /* SUCCESS */
+  .success-box {
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  .success-icon {
+    font-size: 64px;
+    display: block;
+    margin-bottom: 16px;
+    animation: pop-in 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  }
+
+  @keyframes pop-in {
+    from { opacity: 0; transform: scale(0.5); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  .success-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 20px;
+    color: var(--gold-light);
+    margin-bottom: 10px;
+  }
+
+  .success-msg {
+    font-size: 15px;
+    color: rgba(253,248,238,0.8);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .success-donor {
+    background: rgba(201,152,42,0.1);
+    border: 1px solid rgba(201,152,42,0.3);
+    border-radius: 6px;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: var(--cream);
+    margin-bottom: 20px;
+    text-align: left;
+  }
+
+  .success-donor span { color: var(--gold); font-weight: 600; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0d0000;
+    border-top: 2px solid rgba(201,152,42,0.3);
+    padding: 36px 24px;
+    text-align: center;
+  }
+
+  .footer-om { font-size: 28px; display: block; margin-bottom: 10px; opacity: 0.7; }
+
+  .footer-text {
+    font-size: 13px;
+    color: rgba(253,248,238,0.5);
+    line-height: 1.8;
+  }
+
+  .footer-text strong { color: var(--gold); }
+
+  /* scrolling marquee */
+  .marquee-wrap {
+    background: #0d0000;
+    border-top: 1px solid rgba(201,152,42,0.2);
+    border-bottom: 1px solid rgba(201,152,42,0.2);
+    padding: 10px 0;
+    overflow: hidden;
+  }
+
+  .marquee {
+    display: flex;
+    animation: marquee 28s linear infinite;
+    white-space: nowrap;
+  }
+
+  .marquee span {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    color: var(--saffron);
+    padding: 0 48px;
+    letter-spacing: 0.12em;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 480px) {
+    .modal { padding: 28px 20px; }
+    .amount-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .hidden { display: none !important; }
+
+  .error-msg {
+    color: #ff7070;
+    font-size: 12px;
+    margin-top: 5px;
+    font-style: italic;
+  }
+
+  /* copy button */
+  .copy-btn {
+    background: none;
+    border: 1px solid rgba(201,152,42,0.4);
+    border-radius: 4px;
+    color: var(--gold);
+    font-size: 11px;
+    padding: 3px 8px;
+    cursor: pointer;
+    margin-left: 8px;
+    transition: all 0.2s;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.05em;
+  }
+
+  .copy-btn:hover { background: rgba(201,152,42,0.15); }
+</style>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="logo">🏛️ Sithambareswarar Temple</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#donate">Donate</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+<div class="wrapper">
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Sithambareswarar Temple</h1>
-            <p>Mettupatti</p>
-            <p class="tagline">Blessings & Devotion</p>
-        </div>
-    </section>
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="om-symbol">ॐ</div>
+      <div class="temple-name">Arulmigu Sivakamasundari Udanurai<br>Chithambareswarar Temple</div>
+      <div class="divider"></div>
+      <div class="temple-sub">Sri Shiva Devasthanam · Divine Donation Portal</div>
+      <div class="tagline">அருள்மிகு சிவகாமசுந்தரி உடனுறை சிதம்பரேஸ்வரர் திருக்கோவில்</div>
+    </div>
+  </header>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2>About the Temple</h2>
-            <p>
-                Sithambareswarar Temple is a sacred place of worship dedicated to Lord Siva. 
-                Located in the peaceful village of Mettupatti, the temple has been a spiritual 
-                center for devotees for generations, providing blessings and spiritual guidance 
-                to all who visit.
-            </p>
-            <p>
-                Your generous donations help us maintain the temple, conduct religious ceremonies, 
-                and support community welfare activities.
-            </p>
-        </div>
-    </section>
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee">
+      <span>🔱 Har Har Mahadev 🔱</span>
+      <span>🪔 Om Namah Shivaya 🪔</span>
+      <span>🌺 Your donation keeps the temple lamp eternal 🌺</span>
+      <span>🔔 Annadhanam · Abhishekam · Pooja · Utsavam 🔔</span>
+      <span>🔱 Har Har Mahadev 🔱</span>
+      <span>🪔 Om Namah Shivaya 🪔</span>
+      <span>🌺 Your donation keeps the temple lamp eternal 🌺</span>
+      <span>🔔 Annadhanam · Abhishekam · Pooja · Utsavam 🔔</span>
+    </div>
+  </div>
 
-    <!-- Donation Section -->
-    <section id="donate" class="donation-section">
-        <div class="container">
-            <h2>Contribute to the Temple</h2>
-            <p class="donation-subtitle">Your generosity helps us maintain this sacred place</p>
-            
-            <div class="donation-options">
-                <div class="amount-card">
-                    <h3>₹ 100</h3>
-                    <p>Small Donation</p>
-                    <button class="donate-btn" onclick="initiatePayment(100)">Donate ₹100</button>
-                </div>
+  <!-- HERO -->
+  <section class="hero">
+    <span class="hero-lamp">🪔</span>
+    <h2>Support the Divine Cause</h2>
+    <p>
+      Your generous contributions help sustain the sacred rituals, maintain the temple, 
+      and serve devotees through annadhanam and festival celebrations. 
+      Every offering — big or small — is received with Shiva's blessings.
+    </p>
+    <button class="donate-btn" onclick="openModal()">🌺 Donate Now 🌺</button>
+  </section>
 
-                <div class="amount-card">
-                    <h3>₹ 500</h3>
-                    <p>Regular Donation</p>
-                    <button class="donate-btn" onclick="initiatePayment(500)">Donate ₹500</button>
-                </div>
+  <!-- INFO STRIP -->
+  <div class="info-strip">
+    <div class="info-item">
+      <span class="info-icon">🛕</span>
+      <div class="info-label">Temple</div>
+      <div class="info-value">Lord Chithambareswarar</div>
+    </div>
+    <div class="info-item">
+      <span class="info-icon">📿</span>
+      <div class="info-label">Daily Pooja</div>
+      <div class="info-value">6:00 AM · 12:00 PM · 6:00 PM</div>
+    </div>
+    <div class="info-item">
+      <span class="info-icon">💳</span>
+      <div class="info-label">Payment</div>
+      <div class="info-value">GPay / PhonePe / UPI</div>
+    </div>
+    <div class="info-item">
+      <span class="info-icon">🙏</span>
+      <div class="info-label">Trustee</div>
+      <div class="info-value">Subramanian V</div>
+    </div>
+  </div>
 
-                <div class="amount-card">
-                    <h3>₹ 1000</h3>
-                    <p>Generous Donation</p>
-                    <button class="donate-btn" onclick="initiatePayment(1000)">Donate ₹1000</button>
-                </div>
+  <!-- ABOUT -->
+  <div class="section">
+    <div class="section-title">About the Temple</div>
+    <div class="section-rule"></div>
+    <p class="about-text">
+      Arulmigu Sivakamasundari Udanurai Chithambareswarar Temple is a sacred abode of Lord Shiva, 
+      where the divine presence of Goddess Sivakamasundari accompanies the presiding deity 
+      Chithambareswarar. The temple is a beacon of spirituality, tradition, and devotion, 
+      drawing countless devotees who seek the blessings of the Lord for peace, prosperity, 
+      and liberation.<br><br>
+      The temple conducts daily rituals, abhishekam, special poojas during festivals such as 
+      Maha Shivaratri, Karthigai Deepam, Aadi Pooram, and Panguni Uthiram. 
+      Your donations directly fund the upkeep of the sanctum sanctorum, 
+      the conduct of yagnas, annadhanam for pilgrims, and the preservation of our 
+      ancient cultural heritage for future generations.
+    </p>
+  </div>
 
-                <div class="amount-card">
-                    <h3>Custom</h3>
-                    <p>Your Amount</p>
-                    <div class="custom-input">
-                        <input type="number" id="customAmount" placeholder="Enter amount" min="1">
-                        <button class="donate-btn" onclick="donateCustom()">Donate Now</button>
-                    </div>
-                </div>
-            </div>
+</div><!-- /wrapper -->
 
-            <!-- Primary Donate Now Button -->
-            <div class="main-donate-section">
-                <button class="donate-now-btn" onclick="showDonateOptions()">
-                    💚 DONATE NOW
-                </button>
-            </div>
-        </div>
-    </section>
+<!-- FOOTER -->
+<footer>
+  <span class="footer-om">ॐ</span>
+  <div class="footer-text">
+    <strong>Arulmigu Sivakamasundari Udanurai Chithambareswarar Temple</strong><br>
+    Donations managed by: <strong>Subramanian V</strong> &nbsp;|&nbsp; GPay: <strong>9443915935</strong><br><br>
+    <em>All donations are used solely for temple activities and devotee welfare.</em><br>
+    Om Namah Shivaya 🔱
+  </div>
+</footer>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2>Contact Us</h2>
-            <div class="contact-info">
-                <p><strong>Temple Name:</strong> Sithambareswarar Temple</p>
-                <p><strong>Location:</strong> Mettupatti</p>
-                <p><strong>For Donations via UPI:</strong></p>
-                <p class="phone-number">📱 +91 9443915395 (Google Pay / PhonePe)</p>
-                <p class="highlight">Use the UPI ID: 9443915395@okaxis or click "Donate Now" to get payment instructions</p>
-            </div>
-        </div>
-    </section>
+<!-- ══════════════════════════════════
+     DONATION MODAL
+══════════════════════════════════ -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Sithambareswarar Temple, Mettupatti. All rights reserved.</p>
-            <p>Your donations are used for temple maintenance and community welfare.</p>
-        </div>
-    </footer>
+    <div class="modal-title">🌺 Make a Donation</div>
+    <div class="modal-subtitle">Om Namah Shivaya</div>
 
-    <!-- Donation Modal -->
-    <div id="donationModal" class="modal">
-        <div class="modal-content">
-            <!-- Content will be populated by JavaScript -->
-        </div>
+    <!-- Step indicator -->
+    <div class="steps" id="stepIndicator">
+      <div class="step-dot active" id="dot1">1</div>
+      <div class="step-line" id="line1"></div>
+      <div class="step-dot" id="dot2">2</div>
+      <div class="step-line" id="line2"></div>
+      <div class="step-dot" id="dot3">3</div>
     </div>
 
-    <!-- Language Toggle -->
-    <div class="language-toggle">
-        <button onclick="toggleLanguage('en')" class="lang-btn active" id="langEn">English</button>
-        <button onclick="toggleLanguage('ta')" class="lang-btn" id="langTa">Tamil</button>
+    <!-- ── STEP 1: Donor Info ── -->
+    <div id="step1">
+      <div class="form-group">
+        <label class="form-label">Your Full Name *</label>
+        <input class="form-input" type="text" id="donorName" placeholder="Enter your name" />
+        <div class="error-msg hidden" id="nameErr">Please enter your name.</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Your Mobile Number *</label>
+        <input class="form-input" type="tel" id="donorMobile" placeholder="10-digit mobile number" maxlength="10" />
+        <div class="error-msg hidden" id="mobileErr">Please enter a valid 10-digit number.</div>
+      </div>
+      <button class="btn-primary" onclick="goStep2()">Continue →</button>
     </div>
 
-    <script src="script.js"></script>
+    <!-- ── STEP 2: Amount ── -->
+    <div id="step2" class="hidden">
+      <div class="form-group">
+        <label class="form-label">Select or Enter Amount (₹) *</label>
+        <div class="amount-grid">
+          <div class="amount-chip" onclick="selectAmount(51)">₹51</div>
+          <div class="amount-chip" onclick="selectAmount(101)">₹101</div>
+          <div class="amount-chip" onclick="selectAmount(251)">₹251</div>
+          <div class="amount-chip" onclick="selectAmount(501)">₹501</div>
+          <div class="amount-chip" onclick="selectAmount(1001)">₹1001</div>
+          <div class="amount-chip" onclick="selectAmount(1100)">₹1100</div>
+        </div>
+        <input class="form-input" type="number" id="customAmount" placeholder="Or type custom amount" min="1" />
+        <div class="error-msg hidden" id="amtErr">Please enter or select a valid amount.</div>
+      </div>
+      <button class="btn-primary" onclick="goStep3()">Proceed to Pay →</button>
+    </div>
+
+    <!-- ── STEP 3: Payment ── -->
+    <div id="step3" class="hidden">
+      <div class="payment-box">
+        <span class="payment-amount" id="displayAmount">₹0</span>
+        <div class="payment-label">Donation to Chithambareswarar Temple</div>
+        <div style="font-size:13px;color:rgba(253,248,238,0.6);margin-bottom:16px;">
+          Donor: <strong id="displayDonor" style="color:var(--gold-light)"></strong>
+        </div>
+
+        <div class="gpay-row">
+          <div class="gpay-icon">📱</div>
+          <div class="gpay-info">
+            <div class="gpay-title">GPay / UPI Number</div>
+            <div class="gpay-number">9443915935 <button class="copy-btn" onclick="copyNumber()">Copy</button></div>
+            <div class="gpay-name">Subramanian V · sssudeep 2009</div>
+          </div>
+        </div>
+
+        <!-- Direct GPay deep-link -->
+        <a id="gpayLink" href="#" class="gpay-btn" target="_blank" onclick="handleGpay(event)">
+          📲 Open Google Pay
+        </a>
+
+        <!-- Other UPI apps -->
+        <div style="font-size:12px;color:rgba(253,248,238,0.5);margin-bottom:8px;">or open with</div>
+        <div class="upi-apps">
+          <a id="phonePeLink" href="#" class="upi-app" target="_blank" onclick="handleUpiApp(event,'phonepe')">📲 PhonePe</a>
+          <a id="paytmLink"   href="#" class="upi-app" target="_blank" onclick="handleUpiApp(event,'paytm')">📲 Paytm</a>
+          <a id="bhimLink"    href="#" class="upi-app" target="_blank" onclick="handleUpiApp(event,'bhim')">📲 BHIM</a>
+        </div>
+      </div>
+
+      <div style="font-size:12px;color:rgba(253,248,238,0.5);text-align:center;margin-bottom:16px;font-style:italic;">
+        After completing payment in your UPI app, tap the button below.
+      </div>
+
+      <button class="btn-primary" onclick="confirmDone()" style="background:linear-gradient(135deg,#2e7d32,#43a047);">
+        ✅ I Have Completed the Payment
+      </button>
+    </div>
+
+    <!-- ── STEP 4: Success ── -->
+    <div id="step4" class="hidden">
+      <div class="success-box">
+        <span class="success-icon">🙏</span>
+        <div class="success-title">Dhanyavadam!</div>
+        <p class="success-msg">
+          Your offering has been received with the blessings of<br>
+          <strong style="color:var(--gold-light)">Lord Chithambareswarar</strong>.<br><br>
+          May Shiva and Sivakamasundari shower their divine grace upon you and your family.
+        </p>
+        <div class="success-donor" id="successSummary"></div>
+        <button class="btn-primary" onclick="closeModal()">🔱 Close &amp; Return</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const UPI_ID = '9443915935@okbizaxis'; // GPay UPI VPA for mobile number
+  const MERCHANT_NAME = 'Subramanian+V';
+  const PAYEE_MOBILE = '9443915935';
+
+  let donorName = '', donorMobile = '', donationAmount = 0;
+
+  // ── Modal ──
+  function openModal() {
+    document.getElementById('modalOverlay').classList.add('active');
+    resetModal();
+  }
+
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('active');
+  }
+
+  document.getElementById('modalOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  function resetModal() {
+    showStep(1);
+    document.getElementById('donorName').value = '';
+    document.getElementById('donorMobile').value = '';
+    document.getElementById('customAmount').value = '';
+    document.querySelectorAll('.amount-chip').forEach(c => c.classList.remove('selected'));
+    donationAmount = 0;
+    hideErr('nameErr'); hideErr('mobileErr'); hideErr('amtErr');
+  }
+
+  // ── Steps ──
+  function showStep(n) {
+    [1,2,3,4].forEach(i => {
+      document.getElementById('step'+i).classList.toggle('hidden', i !== n);
+    });
+    updateDots(n);
+  }
+
+  function updateDots(n) {
+    for (let i = 1; i <= 3; i++) {
+      const dot = document.getElementById('dot'+i);
+      dot.classList.remove('active','done');
+      if (i < n)  dot.classList.add('done');
+      if (i === n) dot.classList.add('active');
+    }
+    for (let i = 1; i <= 2; i++) {
+      const line = document.getElementById('line'+i);
+      line.classList.toggle('done', i < n);
+    }
+  }
+
+  function goStep2() {
+    donorName   = document.getElementById('donorName').value.trim();
+    donorMobile = document.getElementById('donorMobile').value.trim();
+    let ok = true;
+
+    if (!donorName) { showErr('nameErr'); ok = false; } else hideErr('nameErr');
+    if (!/^\d{10}$/.test(donorMobile)) { showErr('mobileErr'); ok = false; } else hideErr('mobileErr');
+
+    if (ok) showStep(2);
+  }
+
+  function goStep3() {
+    const custom = document.getElementById('customAmount').value.trim();
+    if (custom) donationAmount = parseInt(custom, 10);
+
+    if (!donationAmount || donationAmount < 1) { showErr('amtErr'); return; }
+    hideErr('amtErr');
+
+    document.getElementById('displayAmount').textContent = '₹' + donationAmount.toLocaleString('en-IN');
+    document.getElementById('displayDonor').textContent  = donorName + ' (' + donorMobile + ')';
+
+    buildUpiLinks();
+    showStep(3);
+  }
+
+  function selectAmount(val) {
+    donationAmount = val;
+    document.querySelectorAll('.amount-chip').forEach(c => {
+      c.classList.toggle('selected', parseInt(c.textContent.replace('₹','')) === val);
+    });
+    document.getElementById('customAmount').value = '';
+    hideErr('amtErr');
+  }
+
+  // ── UPI Deep Links ──
+  function buildUpiLinks() {
+    const amt  = donationAmount;
+    const note = encodeURIComponent('Donation to Chithambareswarar Temple by ' + donorName);
+    const name = MERCHANT_NAME;
+
+    // GPay: intent for direct mobile number payment
+    const gpayUrl = `tez://upi/pay?pa=${encodeURIComponent(PAYEE_MOBILE + '@okbizaxis')}&pn=${name}&am=${amt}&cu=INR&tn=${note}`;
+    const gpayFallback = `https://pay.google.com/gp/v/send/${PAYEE_MOBILE}`;
+
+    document.getElementById('gpayLink').setAttribute('data-gpay', gpayUrl);
+    document.getElementById('gpayLink').setAttribute('data-fallback', gpayFallback);
+
+    const phonePeUrl = `phonepe://pay?pa=${encodeURIComponent(PAYEE_MOBILE + '@ybl')}&pn=${name}&am=${amt}&cu=INR&tn=${note}`;
+    document.getElementById('phonePeLink').href = phonePeUrl;
+
+    const paytmUrl = `paytmmp://pay?pa=${encodeURIComponent(PAYEE_MOBILE + '@paytm')}&pn=${name}&am=${amt}&cu=INR&tn=${note}`;
+    document.getElementById('paytmLink').href = paytmUrl;
+
+    const bhimUrl = `upi://pay?pa=${encodeURIComponent(PAYEE_MOBILE + '@upi')}&pn=${name}&am=${amt}&cu=INR&tn=${note}`;
+    document.getElementById('bhimLink').href = bhimUrl;
+  }
+
+  function handleGpay(e) {
+    e.preventDefault();
+    const btn = document.getElementById('gpayLink');
+    const gpayIntent = btn.getAttribute('data-gpay');
+    const fallback   = btn.getAttribute('data-fallback');
+
+    // Try native GPay deep link; fall back to web
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = gpayIntent;
+    document.body.appendChild(iframe);
+    setTimeout(() => {
+      document.body.removeChild(iframe);
+      // If on mobile, the app would have opened. On desktop, open web.
+      window.open(fallback, '_blank');
+    }, 1500);
+  }
+
+  function handleUpiApp(e, app) {
+    // Let the href handle it (deep link to app)
+  }
+
+  // ── Confirm ──
+  function confirmDone() {
+    document.getElementById('successSummary').innerHTML =
+      `Donor: <span>${donorName}</span><br>` +
+      `Mobile: <span>${donorMobile}</span><br>` +
+      `Amount: <span>₹${donationAmount.toLocaleString('en-IN')}</span><br>` +
+      `To: <span>9443915935 (Subramanian V)</span>`;
+    showStep(4);
+  }
+
+  function copyNumber() {
+    navigator.clipboard.writeText('9443915935').then(() => {
+      const btn = document.querySelector('.copy-btn');
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 2000);
+    });
+  }
+
+  function showErr(id) { document.getElementById(id).classList.remove('hidden'); }
+  function hideErr(id) { document.getElementById(id).classList.add('hidden'); }
+
+  // mobile numeric input
+  document.getElementById('donorMobile').addEventListener('input', function() {
+    this.value = this.value.replace(/\D/g,'').slice(0,10);
+  });
+
+  // custom amount clears chip selection
+  document.getElementById('customAmount').addEventListener('input', function() {
+    if (this.value) {
+      document.querySelectorAll('.amount-chip').forEach(c => c.classList.remove('selected'));
+      donationAmount = parseInt(this.value, 10) || 0;
+    }
+  });
+</script>
 </body>
 </html>
