@@ -1,98 +1,140 @@
-
 <!DOCTYPE html>
-<html lang="ta">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>அருள்மிகு ஶ்ரீ அம்பிகா ஸமேத சிதம்பரேஸ்வரர் திருக்கோவில்</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sithambareswarar Temple - Donations</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">🏛️ Sithambareswarar Temple</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#donate">Donate</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
 
-<body oncontextmenu="return false">
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Sithambareswarar Temple</h1>
+            <p>Mettupatti</p>
+            <p class="tagline">Blessings & Devotion</p>
+        </div>
+    </section>
 
-<div class="container">
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About the Temple</h2>
+            <p>
+                Sithambareswarar Temple is a sacred place of worship dedicated to Lord Siva. 
+                Located in the peaceful village of Mettupatti, the temple has been a spiritual 
+                center for devotees for generations, providing blessings and spiritual guidance 
+                to all who visit.
+            </p>
+            <p>
+                Your generous donations help us maintain the temple, conduct religious ceremonies, 
+                and support community welfare activities.
+            </p>
+        </div>
+    </section>
 
-<h1>🛕 அருள்மிகு ஶ்ரீ அம்பிகா ஸமேத சிதம்பரேஸ்வரர் திருக்கோவில்</h1>
-<p class="sub">ஓம் நமசிவாய 🙏 காணிக்கை வழங்குங்கள்</p>
+    <!-- Donation Section -->
+    <section id="donate" class="donation-section">
+        <div class="container">
+            <h2>Contribute to the Temple</h2>
+            <p class="donation-subtitle">Your generosity helps us maintain this sacred place</p>
+            
+            <div class="donation-options">
+                <div class="amount-card">
+                    <h3>₹ 100</h3>
+                    <p>Small Donation</p>
+                    <button class="donate-btn" onclick="initiatePayment(100)">Donate ₹100</button>
+                </div>
 
-<div class="box">
+                <div class="amount-card">
+                    <h3>₹ 500</h3>
+                    <p>Regular Donation</p>
+                    <button class="donate-btn" onclick="initiatePayment(500)">Donate ₹500</button>
+                </div>
 
-<div class="amount-buttons">
-<button onclick="setAmount(50)">₹50</button>
-<button onclick="setAmount(100)">₹100</button>
-<button onclick="setAmount(200)">₹200</button>
-<button onclick="setAmount(400)">₹400</button>
-<button onclick="setAmount(500)">₹500</button>
-<button onclick="setAmount(1000)">₹1000</button>
-<button onclick="setAmount(1500)">₹1500</button>
-<button onclick="setAmount(2000)">₹2000</button>
-<button onclick="setAmount(3000)">₹3000</button>
-<button onclick="setAmount(5000)">₹5000</button>
-</div>
+                <div class="amount-card">
+                    <h3>₹ 1000</h3>
+                    <p>Generous Donation</p>
+                    <button class="donate-btn" onclick="initiatePayment(1000)">Donate ₹1000</button>
+                </div>
 
-<input id="amount" type="number" placeholder="தொகை (₹) *" required>
-<input id="name" type="text" placeholder="பெயர் *" required>
-<input id="mobile" type="tel" placeholder="மொபைல் எண் *" required>
-<input id="place" type="text" placeholder="நகரம் / ஊர் *" required>
-<input id="email" type="email" placeholder="மின்னஞ்சல் (விருப்பம்)">
-<input id="pan" type="text" placeholder="PAN எண் (விருப்பம்)">
+                <div class="amount-card">
+                    <h3>Custom</h3>
+                    <p>Your Amount</p>
+                    <div class="custom-input">
+                        <input type="number" id="customAmount" placeholder="Enter amount" min="1">
+                        <button class="donate-btn" onclick="donateCustom()">Donate Now</button>
+                    </div>
+                </div>
+            </div>
 
-<button onclick="startPayment()" class="donate-btn">UPI மூலம் காணிக்கை செலுத்தவும்</button>
+            <!-- Primary Donate Now Button -->
+            <div class="main-donate-section">
+                <button class="donate-now-btn" onclick="showDonateOptions()">
+                    💚 DONATE NOW
+                </button>
+            </div>
+        </div>
+    </section>
 
-</div>
-</div>
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <div class="contact-info">
+                <p><strong>Temple Name:</strong> Sithambareswarar Temple</p>
+                <p><strong>Location:</strong> Mettupatti</p>
+                <p><strong>For Donations via UPI:</strong></p>
+                <p class="phone-number">📱 +91 8870782080 (Google Pay / PhonePe)</p>
+                <p class="highlight">Scan QR code or click "Donate Now" to pay directly</p>
+            </div>
+        </div>
+    </section>
 
-<script>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Sithambareswarar Temple, Mettupatti. All rights reserved.</p>
+            <p>Your donations are used for temple maintenance and community welfare.</p>
+        </div>
+    </footer>
 
-function setAmount(val){
- document.getElementById("amount").value = val;
-}
+    <!-- Donation Modal -->
+    <div id="donationModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Process Your Donation</h2>
+            <p>Choose your preferred payment method:</p>
+            <div class="payment-methods">
+                <button class="payment-btn" onclick="payViaGPay()">
+                    <span class="icon">🔗</span>
+                    Google Pay
+                </button>
+                <button class="payment-btn" onclick="payViaPhonePe()">
+                    <span class="icon">📱</span>
+                    PhonePe
+                </button>
+                <button class="payment-btn" onclick="payViaUPI()">
+                    <span class="icon">💳</span>
+                    Direct UPI
+                </button>
+            </div>
+        </div>
+    </div>
 
-function generateToken(){
- return "SIVA-" + Date.now() + "-" + Math.floor(Math.random()*1000);
-}
-
-function startPayment(){
-
-let amount = document.getElementById("amount").value;
-let name = document.getElementById("name").value;
-let mobile = document.getElementById("mobile").value;
-let place = document.getElementById("place").value;
-let email = document.getElementById("email").value;
-let pan = document.getElementById("pan").value;
-
-if(!amount || !name || !mobile || !place){
- alert("தயவு செய்து கட்டாய தகவல்களை நிரப்பவும்");
- return;
-}
-
-let token = generateToken();
-let timestamp = new Date().toLocaleString();
-
-let data = { token, timestamp, amount, name, mobile, place, email, pan };
-
-localStorage.setItem("donationData", JSON.stringify(data));
-
-let upi = `upi://pay?pa=chandrasekarandnti@okaxis&pn=Arulmigu%20Sri%20Ambika%20Sametha%20Chidambareswarar&am=${amount}&cu=INR&tn=${token}`;
-
-window.location.href = upi;
-
-setTimeout(()=>{
- if(confirm("பணம் செலுத்தியிருந்தால் OK அழுத்தவும்")){
-   fetch("PASTE_GOOGLE_SCRIPT_URL_HERE",{
-     method:"POST",
-     body:JSON.stringify(data)
-   })
-   .then(res=>res.json())
-   .then(()=>{
-     window.location.href="thankyou.html";
-   });
- }
-},8000);
-
-}
-
-</script>
-
+    <script src="script.js"></script>
 </body>
 </html>
