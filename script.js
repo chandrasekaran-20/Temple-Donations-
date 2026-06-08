@@ -1,6 +1,6 @@
 // Mobile number for donations
-const TEMPLE_PHONE = "8870782080";
-const TEMPLE_UPI = "8870782080@okaxis"; // UPI ID format
+const TEMPLE_PHONE = "9443915935";
+const TEMPLE_UPI = "9443915935@okaxis"; // UPI ID format
 
 // Set current donation amount
 let currentAmount = 0;
